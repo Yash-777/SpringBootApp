@@ -1,0 +1,12 @@
+http://localhost:8090/students/findById/5
+{"timestamp":"2018-08-08T13:07:35.044+0000","message":"Data not available for the requested id.","details":"uri=/students/findById/5"}
+
+http://localhost:8090/exception
+{"timestamp":"2018-08-08T13:06:06.153+0000","message":"test exception","details":"uri=/exception"}
+
+http://localhost:8090/students/
+404.html
+
+http://localhost:8090/view/
+myPage
+
