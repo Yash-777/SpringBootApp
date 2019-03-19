@@ -1,8 +1,16 @@
+/*
+src/main/webapp/css/...
 
+StaticResources_WebAppRoot.class
+	.addResourceHandler("/webapp/css/**")
+	.addResourceLocations("/css/")
+
+	http://localhost:8080/webapp/css/style.css
+*/
 body {
  
   background:#eaeaea!important;
-  color:#444 !important;
+  color:#777 !important;
   font-family: 'Roboto', sans-serif;
   font-weight:100;
   font-size:13px !important;

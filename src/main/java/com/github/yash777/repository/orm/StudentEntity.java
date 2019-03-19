@@ -7,6 +7,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * To avoid mismatches between Java Entities and SQL Tables.
+ * Use annotations with names values.
+ * <ol>
+ * <li>@Table(name = “Task”) </li>
+ * <li>@Id </li>
+ * <li>@GeneratedValue </li>
+ * <li>@Column(name = “columnName”) if `name with value` is not specified
+ * then it uses `column_Name` provided by PhysicalNamingStrategy
+ * <a href="https://docs.jboss.org/hibernate/orm/5.1/userguide/html_single/chapters/domain/naming.html">
+ * docs.jboss.org/hibernate</a></li>
+ * </ol>
+ * 
+ * The role of the org.hibernate.boot.model.naming.ImplicitNamingStrategy contract to determine a 
+ * logical name when the mapping did not provide an explicit name. When an entity does not explicitly name
+ * the database table that it maps to, we need to implicitly determine that table name.
+ * 
+ * @author yashwanth.m
+ *
+ */
 @Entity
 @Table(name = "student")
 public class StudentEntity {

@@ -3,7 +3,20 @@ package com.github.yash777.repository.orm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
+/**
+ * <pre>{@code
+ * org.springframework.data.repository
+	interface
+		Repository<T, ID>
+		CrudRepository<T, ID> extends Repository<T, ID>
+		PagingAndSortingRepository<T, ID> extends CrudRepository<T, ID>
+		JpaRepository<T, ID> extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T>
+ * }</pre>
+ * 
+ * @author yashwanth.m
+ *
+ */
+@Repository()
 public interface StudentDAORepository extends JpaRepository<StudentEntity, Integer> {
 
 }
@@ -17,4 +30,11 @@ You will now be able to use JpaRepository’s methods like save(), findOne(), fi
 
 You don’t need to implement these methods. They are already implemented by Spring Data JPA’s SimpleJpaRepository.
 This implementation is plugged in by Spring automatically at runtime.
+
+@Repository("pr")
+public interface PersonRepository extends JpaRepository<Person, Integer> {
+
+    @Query("SELECT id FROM Person")
+    Iterable<Integer> findAllId();
+}
 */

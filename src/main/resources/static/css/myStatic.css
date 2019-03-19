@@ -1,0 +1,8 @@
+/*
+src/main/resources/static/css/...
+	http://localhost:8080/css/myStatic.css
+	http://localhost:8080/static/css/myStatic.css
+*/
+body {
+	background-color: lightblue;
+}

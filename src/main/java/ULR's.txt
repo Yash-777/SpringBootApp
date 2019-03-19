@@ -1,12 +1,58 @@
-http://localhost:8090/students/findById/5
+http://localhost:8080/student/jdbc/findById/5
 {"timestamp":"2018-08-08T13:07:35.044+0000","message":"Data not available for the requested id.","details":"uri=/students/findById/5"}
 
-http://localhost:8090/exception
+http://localhost:8080/r/exception
 {"timestamp":"2018-08-08T13:06:06.153+0000","message":"test exception","details":"uri=/exception"}
 
-http://localhost:8090/students/
-404.html
+http://localhost:8080/view/index
+	myPage
 
-http://localhost:8090/view/
-myPage
+===== ----- =====
+ThymeleafReplaceConfigurator « Exception processing template "error/500"
+	java.io.FileNotFoundException: class path resource [templates/static/static/.css] cannot be opened because it does not exist
+===== ----- =====
+http://localhost:8080/view/jsp
+	405.html, 500.html
+http://localhost:8080/students/
+	404.html
 
+http://localhost:8080/view/error
+	500.html « [Error resolving template "noViewPage",
+	template might not exist or might not be accessible by any of the configured Template Resolvers]
+	
+	Something went wrong!
+	Our Engineers are on it
+	Go Home
+
+
+===== ----- =====
+Controller Resources - MvcConfiguration
+===== ----- =====
+	
+	=====
+	addViewControllers
+		- TemplateInputException[TIE]
+		- FileNotFoundException [FNF]
+	=====
+	http://localhost:8080/c/template/nonerror/Index.html
+	http://localhost:8080/c/t/static/css/style.css
+	http://localhost:8080/c/t/static/js/staticJS.js
+	http://localhost:8080/c/t/static/html/StaticView.html
+	
+===== ----- =====
+Defaule static Resources [src/main/resources/static/css/...]
+===== ----- =====
+	http://localhost:8080/css/myStatic.css
+
+	===== ----- =====
+	WebRoot Static Resources Overriding Default - StaticResourceResourceHandler.class
+	===== ----- =====
+	addResourceHandlers( ResourceHandlerRegistry )
+		http://localhost:8080/static/css/myStatic.css - [Default (/) ]
+		http://localhost:8080/webapp/css/style.css
+		http://localhost:8080/templates/style.css
+	
+=============================
+	Status Codes
+=============================
+	Response has been set to 304 (NOT_MODIFIED). No further processing

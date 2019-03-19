@@ -6,7 +6,7 @@
 	<groupId>com.github.yash777</groupId>
 	<artifactId>SpringBootApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>war</packaging><!-- https://stackoverflow.com/a/21244397/5081877 -->
 
 	<name>SpringBootApp</name>
 	<description>Demo project for Spring Boot</description>
@@ -35,12 +35,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -67,11 +62,34 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		
-		<dependency> <!-- Error Pages -->
+		<!--
+		View Resolver src/main/resources/templates | src/main/webapp/WEB-INF
+			Files under WEB-INF can only accessed by controllers. So that to hide them from direct access.
+				Thymeleaf - /templates/*.html
+				FreeMarker- /templates/freemarker/*.html | /WEB-INF/views/freemarker/*.html
+				JSP       - /WEB-INF/pages/*.jsp
+		-->
+		<dependency> <!-- Error Handlers, Pagination (https://www.baeldung.com/spring-thymeleaf-pagination) -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		
+		<!-- spring-boot-starter-parent - 1.4.2 missing lang3 version -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -83,21 +101,54 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- Enables LiveReload to refresh browser automatically
+			https://spring.io/guides/gs/serving-web-content/#_developing_web_apps
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/webapp</directory>
+				<includes>
+					<include>**/**</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/**</include>
+				</includes>
+			</resource>
+		</resources>
+		
 		<plugins>
+			<!-- To create a runnable JAR with Spring Boot, use the spring-boot-maven-plugin in your pom.xml -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				
-				<!-- <executions>
+				<executions>
 					<execution>
 						<goals>
 							<goal>repackage</goal>
 						</goals>
 					</execution>
-				</executions> -->
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<useSystemClassLoader>false</useSystemClassLoader>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+	<title>Page</title>
+	<!-- To work this request must pass through controller.
+	<script type="text/javascript" th:src="@{/static/js/message.js}"> </script>
+	-->
+	
+	<script type="text/javascript" src="/static/js/message.js"> </script>
+	
+	<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src -->
+	<link href="/static/css/myStatic.css" rel="stylesheet" type="text/css" />
+	<style>
+		#inline-style { background: blue; }
+	</style>
+	
+	<style>
+		@import url("/templates/style.css") print;
+	</style>
+</head>
+<body>
+	<img alt="[Spring logo]" src="/static/images/spring.png" width="115px" height="100px">
+</body>
+</html>

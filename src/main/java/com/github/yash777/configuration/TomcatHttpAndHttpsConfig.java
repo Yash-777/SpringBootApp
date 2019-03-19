@@ -12,8 +12,6 @@ import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.yash777.componets.AppPropertiesComponent;
-
 /**
  * Indicates that a class declares one or more <b>@Bean</b> methods and may be processed by the Spring container to
  * generate bean definitions and service requests for those beans at runtime, for example:
@@ -29,23 +27,19 @@ import com.github.yash777.componets.AppPropertiesComponent;
  }
 }</pre>
  * 
+ * Spring Boot Security (+) Thymeleaf « https://stackoverflow.com/q/37270322/5081877
+ * 
  * @author yashwanth.m
  *
  */
 @Configuration
 public class TomcatHttpAndHttpsConfig {
 	
+	@Value("${app.http.port:8080}")     private int httpPort;
+	@Value("${app.https.port:8443}")    private int httpsPort;
+	@Value("${app.ssl.redirect:false}") private boolean sslRedirect;
+	@Value("${app.domain}")             private String applicationDomain;
 	
-	@Value("${app.http.port:8080}")
-	private int httpPort;
-	@Value("${app.https.port:8443}")
-	private int httpsPort;
-	
-	@Value("${app.ssl.redirect:false}")
-	private boolean sslRedirect;
-	
-	@Value("${app.domain}")
-	private String applicationDomain;
 	@PostConstruct
 	public void print() {
 		System.out.println("============");
@@ -96,6 +90,12 @@ public class TomcatHttpAndHttpsConfig {
 		return tomcat;
 	}
 	
+	/**
+	 * https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-web-applications.html
+	 * #boot-features-customizing-configurableservletwebserverfactory-directly
+	 * 
+	 * @return
+	 */
 	private Connector initiateHttpConnector(){
 		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
 		connector.setScheme("http");

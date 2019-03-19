@@ -2,9 +2,9 @@ package com.github.yash777;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.core.SpringVersion;
 
 /*@SpringBootApplication
@@ -15,7 +15,12 @@ import org.springframework.core.SpringVersion;
 */
 
 @SpringBootApplication(scanBasePackages = {"com.github.yash777.*"})
-public class BootMainApplication {
+public class BootMainApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(BootMainApplication.class);
+	}
 
 	public static void main(String[] args) {
 		

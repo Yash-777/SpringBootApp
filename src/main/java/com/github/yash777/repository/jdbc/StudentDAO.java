@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * Spring JDBC provides a layer on top of JDBC. It used concepts like JDBCTemplate.
+ * <br />
+ * 1. Mapping parameters to queries.<br />
+ * 2. Liquidating ResultSets to beans.<br />
+ * 
  * @author yashwanth.m
  *
  */

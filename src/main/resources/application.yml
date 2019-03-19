@@ -8,3 +8,11 @@ server:
     key-store-provider: SUN
     key-store-type: JKS
     key-store-password: tomcat
+    
+# Use Ctrl + Shift + C to comment a line
+
+#spring:
+#  jpa:
+#    hibernate:
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
